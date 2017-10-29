@@ -1,0 +1,27 @@
+<view class="container">
+    <view class="orders">
+        <navigator 
+        url="../orderDetail/orderDetail?activityapplyid={{item.id}}&userid={{userInfo.id}}" class="order" wx:for="{{orderList}}" wx:key="{{item.id}}" data-order-index="{{index}}">
+            <view class="h">
+                <view class="l">活动编号：{{item.order_sn}}</view>
+                <view class="r">{{item.order_status_text}}</view>
+            </view>
+            <view class="goods" wx:for="{{item.activityList}}" wx:key="{{gitem.id}}" wx:for-item="gitem">
+                <view class="img">
+                    <image src="{{gitem.list_img}}"></image>
+                </view>
+                <view class="info">
+                    <text class="name">{{gitem.activity_name}}</text>
+                </view>
+                
+            </view>
+            <view class="b">
+                <view class="l">实付：￥{{item.actual_price}}</view>
+                <view class="r">
+                <button class="btn" data-cancellorder="{{item.id}}" catchtap="cancellOrder" wx:if="{{item.handleOption.pay}}">取消订单</button>
+                    <button class="btn" data-id="{{item.activityList[0].activity_id}}" catchtap="payOrder" wx:if="{{item.handleOption.pay}}">去付款</button>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</view>
